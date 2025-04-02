@@ -140,7 +140,3 @@ Section:NewButton("Сбросить гравитацию", "Устанавлив
     game.Workspace.Gravity = 300
     AddNotification('Сброс','Текущая гравитация - 300')
 end)
-Esp.NamesFont = 2
-Esp.NamesSize = 13
-    end
-end)
