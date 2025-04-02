@@ -5,7 +5,7 @@ local Tab = Window:NewTab("Функции")
 
 local Section = Tab:NewSection("Простые функции")
 
-Section:NewButton("Включить флай (F)", "Включить\Выключить режии полёта (F)", function()
+Section:NewButton("Включить флай (B)", "Включить\Выключить режии полёта (B)", function()
     local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local UserInputService = game:GetService("UserInputService")
@@ -57,7 +57,7 @@ local function fly()
 end
 
 UserInputService.InputBegan:Connect(function(input, gameProcessed)
-    if not gameProcessed and input.KeyCode == Enum.KeyCode.F then
+    if not gameProcessed and input.KeyCode == Enum.KeyCode.B then
         AddNotification('Флай','Флай - '..tostring(flying))
         flying = not flying
         if flying then
