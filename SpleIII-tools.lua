@@ -58,16 +58,16 @@ end
 
 UserInputService.InputBegan:Connect(function(input, gameProcessed)
     if not gameProcessed and input.KeyCode == Enum.KeyCode.B then
-        AddNotification('Флай','Флай - '..tostring(flying))
         flying = not flying
         if flying then
             workspace.Gravity = 0 
             fly() 
-        else
             AddNotification('Флай','Флай - '..tostring(flying))
+        else
             flySpeed = 100 
             HumanoidRootPart.Velocity = Vector3.new(0, 0, 0)
             workspace.Gravity = originalGravity
+            AddNotification('Флай','Флай - '..tostring(flying))
         end
     end
 end)
