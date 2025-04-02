@@ -70,7 +70,7 @@ UserInputService.InputBegan:Connect(function(input, gameProcessed)
 end)
 end)
 
-Section:NewKeybind("KeybindText", "KeybindInfo", Enum.KeyCode.F, function()
+Section:NewButton("Включить Ноуклип (N)", "Включить\Выключить режии ноуклипа (N)", function()
 	getgenv().Players = game:GetService'Players'
 getgenv().Host = Players.LocalPlayer
 getgenv().AddNotification = function(title, text) game:GetService'StarterGui':SetCore("SendNotification", {Title = title; Text = text;}) end
@@ -78,7 +78,7 @@ getgenv().RunService = game:GetService'RunService';
 getgenv().ContextActionService = game:GetService'ContextActionService';
 
 local Noclip = true;
-local NoclipKey = Enum.KeyCode.F;
+local NoclipKey = 'N';
 
 RunService.RenderStepped:Connect(function()
     if Noclip then
