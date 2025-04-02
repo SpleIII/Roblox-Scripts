@@ -9,6 +9,7 @@ Section:NewButton("Включить флай (F)", "Включить\Выклю�
     local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local UserInputService = game:GetService("UserInputService")
+getgenv().AddNotification = function(title, text) game:GetService'StarterGui':SetCore("SendNotification", {Title = title; Text = text;}) end
 
 local LocalPlayer = Players.LocalPlayer
 local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
@@ -57,11 +58,13 @@ end
 
 UserInputService.InputBegan:Connect(function(input, gameProcessed)
     if not gameProcessed and input.KeyCode == Enum.KeyCode.F then
+        AddNotification('Флай','Флай - '..tostring(flying))
         flying = not flying
         if flying then
             workspace.Gravity = 0 
             fly() 
         else
+            AddNotification('Флай','Флай - '..tostring(flying))
             flySpeed = 100 
             HumanoidRootPart.Velocity = Vector3.new(0, 0, 0)
             workspace.Gravity = originalGravity
