@@ -70,6 +70,44 @@ UserInputService.InputBegan:Connect(function(input, gameProcessed)
 end)
 end)
 
+Section:NewKeybind("KeybindText", "KeybindInfo", Enum.KeyCode.F, function()
+	getgenv().Players = game:GetService'Players'
+getgenv().Host = Players.LocalPlayer
+getgenv().AddNotification = function(title, text) game:GetService'StarterGui':SetCore("SendNotification", {Title = title; Text = text;}) end
+getgenv().RunService = game:GetService'RunService';
+getgenv().ContextActionService = game:GetService'ContextActionService';
+
+local Noclip = true;
+local NoclipKey = Enum.KeyCode.F;
+
+RunService.RenderStepped:Connect(function()
+    if Noclip then
+        for _,v in pairs(Host.Character:GetDescendants()) do
+            if v:IsA'BasePart' and v.CanCollide then
+                v.CanCollide = false
+            end
+        end
+    else
+        for _,v in pairs(Host.Character:GetDescendants()) do
+            if v:IsA'BasePart' and not v.CanCollide then
+                v.CanCollide = true
+            end
+        end
+    end
+end)
+
+function Noclipping(ActionName:string, Properties:EnumItem)
+    if ActionName == 'Ноуклип' then
+        if not Properties or Properties == Enum.UserInputState.Begin then
+            Noclip = not Noclip
+            AddNotification('Ноуклип','Ноуклип - '..tostring(Noclip))
+        end
+    end
+end
+
+ContextActionService:BindAction('Ноуклип', Noclipping, true, Enum.KeyCode[NoclipKey])
+end)
+
 Section:NewSlider("Скорость бега", "Изменить скорость бега", 250, 0, function(s) -- 500 (Макс. значение) | 0 (Мин. значение)
     game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
 end)
@@ -78,13 +116,9 @@ Section:NewButton("Сбросить скорость бега", "Устанав�
     game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
 end)
 
--- Переключатель
-
 Section:NewSlider("Сила прыжка", "Изменить силу прыжка", 500, 0, function(j) -- 500 (Макс. значение) | 0 (Мин. значение)
     game.Players.LocalPlayer.Character.Humanoid.JumpPower = j
 end)
-
--- Переключатель
 
 Section:NewButton("Сбросить силу прыжка", "Устанавливается сила прыжка на стартовое значение 50", function()
     game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
