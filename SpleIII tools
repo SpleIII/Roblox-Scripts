@@ -140,37 +140,6 @@ Section:NewButton("Сбросить гравитацию", "Устанавлив
     game.Workspace.Gravity = 300
     AddNotification('Сброс','Текущая гравитация - 300')
 end)
-
-Section:NewToggle("ЕСП", "Переключить видение игроков через стены", function(state)
-    if state then
-local Esp = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/x114/RobloxScripts/main/OpenSourceEsp"))()
-        -- Boxes --
-Esp.Box = true
-Esp.BoxColor = Color3.fromRGB(0,255,0)
-Esp.BoxOutline = true
-Esp.BoxOutlineColor = Color3.fromRGB(0,0,0)
--- HealthBars --
-Esp.HealthBar = true
-Esp.HealthBarSide = "Right" -- Left,Bottom,Right
--- Names --
-Esp.Names = true
-Esp.NamesColor = Color3.fromRGB(255,255,255)
-Esp.NamesOutline = true
-Esp.NamesFont = 2
-Esp.NamesSize = 13
-    else
-        -- Boxes --
-Esp.Box = false
-Esp.BoxColor = Color3.fromRGB(255,255,255)
-Esp.BoxOutline = false
-Esp.BoxOutlineColor = Color3.fromRGB(0,0,0)
--- HealthBars --
-Esp.HealthBar = false
-Esp.HealthBarSide = "Left" -- Left,Bottom,Right
--- Names --
-Esp.Names = false
-Esp.NamesColor = Color3.fromRGB(255,255,255)
-Esp.NamesOutline = false
 Esp.NamesFont = 2
 Esp.NamesSize = 13
     end
