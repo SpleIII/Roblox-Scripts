@@ -62,12 +62,12 @@ UserInputService.InputBegan:Connect(function(input, gameProcessed)
         if flying then
             workspace.Gravity = 0 
             fly() 
-            AddNotification('Флай','Флай - '..tostring(flying))
+            AddNotification('Флай','Флай - Выключен')
         else
             flySpeed = 100 
             HumanoidRootPart.Velocity = Vector3.new(0, 0, 0)
             workspace.Gravity = originalGravity
-            AddNotification('Флай','Флай - '..tostring(flying))
+            AddNotification('Флай','Флай - Включён')
         end
     end
 end)
