@@ -10,7 +10,7 @@ local Esp = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/x114
 -- Скрипт для всех режимов
 local Section = Functions:NewSection("Простые функции")
 
-Section:NewButton("Включить флай (B)", "Включить\Выключить режим полёта (B)", function()
+Section:NewButton("Включить флай (B)", "Включить/Выключить режим полёта (B)", function()
     local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local UserInputService = game:GetService("UserInputService")
@@ -78,7 +78,7 @@ UserInputService.InputBegan:Connect(function(input, gameProcessed)
 end)
 end)
 
-Section:NewButton("Включить Ноуклип (N)", "Включить\Выключить режим ноуклипа (N)", function()
+Section:NewButton("Включить Ноуклип (N)", "Включить/Выключить режим ноуклипа (N)", function()
 	getgenv().Players = game:GetService'Players'
 getgenv().Host = Players.LocalPlayer
 getgenv().AddNotification = function(title, text) game:GetService'StarterGui':SetCore("SendNotification", {Title = title; Text = text;}) end
@@ -201,33 +201,33 @@ elseif drop == "7500 Rebirth" then
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(560.328522, 3.48207605, -9.50659275, 1, 0, 0, 0, 1, 0, 0, 0, 1)
 end
 end)
-MultiplierSimulatorX:NewDropdown("Ultra Rebirth", "", {"1 Ultra Rebirth", "3 Ultra Rebirth", "10 Ultra Rebirth", "25 Ultra Rebirth", "50 Ultra Rebirth", "100 Ultra Rebirth", "250 Ultra RebirthUltra Rebirth", "500 Ultra RebirthUltra Rebirth", "1000 Ultra RebirthUltra Rebirth", "2500 Ultra RebirthUltra Rebirth", "5000 Ultra RebirthUltra Rebirth", "10000 Ultra RebirthUltra Rebirth", "35000 Ultra RebirthUltra Rebirth"}, function(drop)
+MultiplierSimulatorX:NewDropdown("Ultra Rebirth", "", {"1 Ultra Rebirth", "3 Ultra Rebirth", "10 Ultra Rebirth", "25 Ultra Rebirth", "50 Ultra Rebirth", "100 Ultra Rebirth", "250 Ultra Rebirth", "500 Ultra Rebirth", "1000 Ultra Rebirth", "2500 Ultra Rebirth", "5000 Ultra Rebirth", "10000 Ultra Rebirth", "35000 Ultra Rebirth"}, function(drop)
     if drop == "1 Ultra Rebirth" then
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(446.85965, 3.6661948, 11.0857506, 1, 0, 0, 0, 1, 0, 0, 0, 1)
 elseif drop == "3 Ultra Rebirth" then
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(439.85965, 3.6661948, 11.0857544, 1, 0, 0, 0, 1, 0, 0, 0, 1)
 elseif drop == "10 Ultra Rebirth" then
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(432.85965, 3.6661948, 11.0857544, 1, 0, 0, 0, 1, 0, 0, 0, 1)
-elseif drop == "20 Ultra Rebirth" then
+elseif drop == "25 Ultra Rebirth" then
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(425.85965, 3.6661948, 11.0857544, 1, 0, 0, 0, 1, 0, 0, 0, 1)
 elseif drop == "50 Ultra Rebirth" then
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(425.85965, 3.6661948, 11.0857544, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(418.85965, 3.6661948, 11.0857544, 1, 0, 0, 0, 1, 0, 0, 0, 1)
 elseif drop == "100 Ultra Rebirth" then
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(511.328522, 3.48207605, -9.50659275, 1, 0, 0, 0, 1, 0, 0, 0, 1)
-elseif drop == "200 Ultra Rebirth" then
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(518.328522, 3.48207605, -9.50659275, 1, 0, 0, 0, 1, 0, 0, 0, 1)
-elseif drop == "450 Ultra Rebirth" then
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(525.328522, 3.48207605, -9.50659275, 1, 0, 0, 0, 1, 0, 0, 0, 1)
-elseif drop == "800 Ultra Rebirth" then
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(532.328522, 3.48207605, -9.50659275, 1, 0, 0, 0, 1, 0, 0, 0, 1)
-elseif drop == "1500 Ultra Rebirth" then
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(539.328522, 3.48207605, -9.50659275, 1, 0, 0, 0, 1, 0, 0, 0, 1)
-elseif drop == "3000 Ultra Rebirth" then
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(546.328522, 3.48207605, -9.50659275, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(411.328522, 3.48207605, 11.0857544, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+elseif drop == "250 Ultra Rebirth" then
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(404.328522, 3.48207605, 11.0857544, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+elseif drop == "500 Ultra Rebirth" then
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(397.328522, 3.48207605, 11.0857544, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+elseif drop == "1000 Ultra Rebirth" then
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(390.328522, 3.48207605, 11.0857544, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+elseif drop == "2500 Ultra Rebirth" then
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(383.328522, 3.48207605, 11.0857544, 1, 0, 0, 0, 1, 0, 0, 0, 1)
 elseif drop == "5000 Ultra Rebirth" then
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(553.328522, 3.48207605, -9.50659275, 1, 0, 0, 0, 1, 0, 0, 0, 1)
-elseif drop == "7500 Ultra Rebirth" then
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(560.328522, 3.48207605, -9.50659275, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(376.328522, 3.48207605, 11.0857544, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+elseif drop == "10000 Ultra Rebirth" then
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(369.328522, 3.48207605, 11.0857544, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+elseif drop == "35000 Ultra Rebirth" then
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(362.328522, 3.48207605, 11.0857544, 1, 0, 0, 0, 1, 0, 0, 0, 1)
 end
 end)
 
