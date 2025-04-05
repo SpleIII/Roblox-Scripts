@@ -612,7 +612,7 @@ function Kavo.CreateLib(kavName, themeList)
                 viewInfo.Size = UDim2.new(0, 23, 0, 23)
                 viewInfo.ZIndex = 2
                 viewInfo.Image = "rbxassetid://3926305904"
-                viewInfo.ImageColor3 = Color3.fromRGB(0, 166, 58)
+                viewInfo.ImageColor3 = themeList.SchemeColor
                 Objects[viewInfo] = "ImageColor3"
                 viewInfo.ImageRectOffset = Vector2.new(764, 764)
                 viewInfo.ImageRectSize = Vector2.new(36, 36)
@@ -631,7 +631,7 @@ function Kavo.CreateLib(kavName, themeList)
 
                 moreInfo.Name = "TipMore"
                 moreInfo.Parent = infoContainer
-                moreInfo.BackgroundColor3 = Color3.fromRGB(themeList.SchemeColor.r * 255 - 14, themeList.SchemeColor.g * 255 - 17, themeList.SchemeColor.b * 255 - 13)
+                moreInfo.BackgroundColor3 = Color3.fromRGB(0, 166, 58)
                 moreInfo.Position = UDim2.new(0, 0, 2, 0)
                 moreInfo.Size = UDim2.new(0, 353, 0, 33)
                 moreInfo.ZIndex = 9
