@@ -1,5 +1,5 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Robojini/Tuturial_UI_Library/main/UI_Template_1"))()
-local Window = Library.CreateLib("SpleIII Tools", "RJTheme7")
+local Window = Library.CreateLib("Multi-Scripts by SpleIII", "RJTheme7")
 
 -- Вкладки
 local Functions = Window:NewTab("Функции")
