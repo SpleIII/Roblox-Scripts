@@ -1,9 +1,10 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/SpleIII/Roblox-Scripts/refs/heads/main/SpleIII-UI.lua"))()
-local Window = Library.CreateLib("Multi-Script by SpleIII", "Serpent")
+local Window = Library.CreateLib("SpleIII Tools", "Serpent")
 
 -- Вкладки
 local Section = Window:NewTab("Функции")
-local Teleport = Window:NewTab("Телепорт к игрокам")
+local Cheats = Window:NewTab("Читерские штучки")
+local Misc = Window:NewTab("Прочее")
 local MultiplierSimulatorX = Window:NewTab("Multiplier Simulator X")
 local Socials = Window:NewTab("Ссылки")
 
@@ -152,26 +153,18 @@ Section:NewButton("Сбросить гравитацию", "Устанавлив
     AddNotification('Сброс','Текущая гравитация - 300')
 end)
 
-Section:NewButton("Включить WallHack", "", function()
+-- Скрипт для шутеров
+
+local Cheats = Cheats:NewSection("Скрипты для шутеров")
+Cheats:NewButton("ВХ", "", function(state)
     getgenv().AddNotification = function(title, text) game:GetService'StarterGui':SetCore("SendNotification", {Title = title; Text = text;}) end
-    local Esp = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/x114/RobloxScripts/main/OpenSourceEsp"))()
-	Esp.Box = true
-	Esp.BoxColor = Color3.fromRGB(0,255,0)
-	Esp.BoxOutline = true
-	Esp.BoxOutlineColor = Color3.fromRGB(0,0,0)
-	Esp.HealthBar = true
-	Esp.HealthBarSide = "Left" -- Left,Bottom,Right
-	Esp.Names = true
-	Esp.NamesColor = Color3.fromRGB(255,255,255)
-	Esp.NamesOutline = true
-	Esp.NamesFont = 2
-	Esp.NamesSize = 13
-    AddNotification('WallHack','Wallhack - Включён')
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/SpleIII/Roblox-Scripts/refs/heads/main/SpleIII-ESP-True.lua"))()
+    AddNotification('Читы','WallHack - Включён')
 end)
 
--- Скрипт для телепортов
+-- Прочие скрипты
 
-local Teleport = Teleport:NewSection("Телепорт к игрокам")
+local Misc = Misc:NewSection("Телепорт к игрокам")
 
 players = {}
 
@@ -179,19 +172,19 @@ for i,v in pairs(game:GetService("Players"):GetChildren()) do
    table.insert(players,v.Name)
 end
 
-Teleport:NewDropdown("Выбрать игрока для телепортации", " ", players, function(abc)
+Misc:NewDropdown("Выбрать игрока для телепортации", " ", players, function(abc)
     Select = abc
 end)
 
 
-Teleport:NewButton("Обновить список", " ", function()
+Misc:NewButton("Обновить список", " ", function()
     table.clear(players)
 for i,v in pairs(game:GetService("Players"):GetChildren()) do
    table.insert(players,v.Name)
 end
 end)
 
-Teleport:NewButton("Телепортироваться к игроку", " ", function()
+Misc:NewButton("Телепортироваться к игроку", " ", function()
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[Select].Character.HumanoidRootPart.CFrame
 end)
 
