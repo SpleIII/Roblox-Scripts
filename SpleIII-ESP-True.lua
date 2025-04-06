@@ -22,7 +22,7 @@ ESP.ShowHealth = true;
 ESP.ShowTracer = false;
 
 --// Enable Distance
-ESP.ShowDistance = false;
+ESP.ShowDistance = true;
 
 --[[
     Enable skeletons: (currently broken)
