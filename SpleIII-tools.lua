@@ -80,41 +80,25 @@ end)
 end)
 
 Section:NewButton("Включить Ноуклип (N)", "Включить/Выключить режим ноуклипа (N)", function()
-	getgenv().Players = game:GetService'Players'
-getgenv().Host = Players.LocalPlayer
-getgenv().AddNotification = function(title, text) game:GetService'StarterGui':SetCore("SendNotification", {Title = title; Text = text;}) end
-getgenv().RunService = game:GetService'RunService';
-getgenv().ContextActionService = game:GetService'ContextActionService';
-
-local Noclip = true;
-local NoclipKey = 'N';
-
-RunService.RenderStepped:Connect(function()
-    if Noclip then
-        for _,v in pairs(Host.Character:GetDescendants()) do
-            if v:IsA'BasePart' and v.CanCollide then
-                v.CanCollide = false
-            end
-        end
-    else
-        for _,v in pairs(Host.Character:GetDescendants()) do
-            if v:IsA'BasePart' and not v.CanCollide then
-                v.CanCollide = true
-            end
-        end
-    end
-end)
-
-function Noclipping(ActionName:string, Properties:EnumItem)
-    if ActionName == 'Ноуклип' then
-        if not Properties or Properties == Enum.UserInputState.Begin then
-            Noclip = not Noclip
-            AddNotification('Ноуклип','Ноуклип - '..tostring(Noclip))
-        end
-    end
+	getgenv().AddNotification = function(title, text) game:GetService'StarterGui':SetCore("SendNotification", {Title = title; Text = text;}) end
+        noclip = false
+game:GetService('RunService').Stepped:connect(function()
+if noclip then
+game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
 end
-
-ContextActionService:BindAction('Ноуклип', Noclipping, true, Enum.KeyCode[NoclipKey])
+end)
+plr = game.Players.LocalPlayer
+mouse = plr:GetMouse()
+mouse.KeyDown:connect(function(key)
+ 
+if key == "e" then
+noclip = not noclip
+game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
+end
+end)
+print('Loaded')
+print('Press "E" to noclip')
+		AddNotification('Ноуклип','Ноуклип - '..tostring(Noclip))
 end)
 
 
