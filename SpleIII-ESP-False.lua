@@ -1,19 +1,60 @@
-local Players = game:GetService("Players")
-local RunService = game:GetService("RunService")
+--[[
+	WARNING: Heads up! This script has not been verified by ScriptBlox. Use at your own risk!
+]]
+local ESP = loadstring(game:HttpGet("https://raw.githubusercontent.com/linemaster2/esp-library/main/library.lua"))();
 
-local function highlightPlayers()
-    for _, player in ipairs(Players:GetPlayers()) do
-        if player.Character and player.Character:FindFirstChild("Humanoid") then
-            local highlight = Instance.new("Highlight")
-            highlight.Parent = player.Character
-            highlight.FillColor = Color3.fromRGB(0, 255, 0)
-            highlight.FillTransparency = 0
-            highlight.OutlineColor = Color3.fromRGB(0, 0, 0)
-            highlight.OutlineTransparency = 0
-        end
-    end
-end
+--// Master switch
+ESP.Enabled = false;
 
-RunService.Heartbeat:Connect(function()
-    highlightPlayers()
-end)
+--// Enable boxes
+ESP.ShowBox = false;
+
+--// Set the box type to corner
+ESP.BoxType = "Corner Box Esp";
+
+--// Enable names
+ESP.ShowName = false;
+
+--// Enable Healhbar
+ESP.ShowHealth = false;
+
+--// Enable tracers
+ESP.ShowTracer = false;
+
+--// Enable Distance
+ESP.ShowDistance = false;
+
+--[[
+    Enable skeletons: (currently broken)
+    ESP.ShowSkeletons = true;
+]]
+
+
+
+--[[
+    These are all the settings
+    local ESP_SETTINGS = {
+        BoxOutlineColor = Color3.new(0, 0, 0),
+        BoxColor = Color3.new(1, 1, 1),
+        NameColor = Color3.new(1, 1, 1),
+        HealthOutlineColor = Color3.new(0, 0, 0),
+        HealthHighColor = Color3.new(0, 1, 0),
+        HealthLowColor = Color3.new(1, 0, 0),
+        CharSize = Vector2.new(4, 6),
+        Teamcheck = false,
+        WallCheck = false,
+        Enabled = false,
+        ShowBox = false,
+        BoxType = "2D",
+        ShowName = false,
+        ShowHealth = false,
+        ShowDistance = false,
+        ShowSkeletons = false,
+        ShowTracer = false,
+        TracerColor = Color3.new(1, 1, 1), 
+        TracerThickness = 2,
+        SkeletonsColor = Color3.new(1, 1, 1),
+        TracerPosition = "Bottom",
+    }
+    ermm yep thats about it
+]]
