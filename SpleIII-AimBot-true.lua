@@ -1,100 +1,134 @@
-local Camera = workspace.CurrentCamera
-local Players = game:GetService("Players")
+local teamCheck = false
+local fov = 90
+local smoothing = 0.02
+local predictionFactor = 0.08  -- Adjust this factor to improve prediction accuracy
+local highlightEnabled = false  -- Variable to enable or disable target highlighting. Change to False if using an ESP script.
+local lockPart = "HumanoidRootPart"  -- Choose what part it locks onto. Ex. HumanoidRootPart or Head
+
+local Toggle = false  -- Enable or disable toggle mode
+local ToggleKey = Enum.KeyCode.Y  -- Choose the key for toggling aimbot lock
+
 local RunService = game:GetService("RunService")
 local UserInputService = game:GetService("UserInputService")
-local TweenService = game:GetService("TweenService")
-local LocalPlayer = Players.LocalPlayer
-local Holding = false
+local StarterGui = game:GetService("StarterGui")
+local Players = game:GetService("Players")
 
-_G.AimbotEnabled = true
-_G.TeamCheck = false -- If set to true then the script would only lock your aim at enemy team members.
-_G.AimPart = "Head" -- Where the aimbot script would lock at.
-_G.Sensitivity = 0 -- How many seconds it takes for the aimbot script to officially lock onto the target's aimpart.
+getgenv().AddNotification = function(title, text) game:GetService'StarterGui':SetCore("SendNotification", {Title = title; Text = text;}) end
+    AddNotification('Читы','AimBot - Включён')
 
-_G.CircleSides = 64 -- How many sides the FOV circle would have.
-_G.CircleColor = Color3.fromRGB(255, 255, 255) -- (RGB) Color that the FOV circle would appear as.
-_G.CircleTransparency = 0.7 -- Transparency of the circle.
-_G.CircleRadius = 120 -- The radius of the circle / FOV.
-_G.CircleFilled = false -- Determines whether or not the circle is filled.
-_G.CircleVisible = true -- Determines whether or not the circle is visible.
-_G.CircleThickness = 0 -- The thickness of the circle.
+local FOVring = Drawing.new("Circle")
+FOVring.Visible = true
+FOVring.Thickness = 1
+FOVring.Radius = fov
+FOVring.Transparency = 0.8
+FOVring.Color = Color3.fromRGB(255, 128, 128)
+FOVring.Position = workspace.CurrentCamera.ViewportSize / 2
 
-local FOVCircle = Drawing.new("Circle")
-FOVCircle.Position = Vector2.new(Camera.ViewportSize.X / 2, Camera.ViewportSize.Y / 2)
-FOVCircle.Radius = _G.CircleRadius
-FOVCircle.Filled = _G.CircleFilled
-FOVCircle.Color = _G.CircleColor
-FOVCircle.Visible = _G.CircleVisible
-FOVCircle.Radius = _G.CircleRadius
-FOVCircle.Transparency = _G.CircleTransparency
-FOVCircle.NumSides = _G.CircleSides
-FOVCircle.Thickness = _G.CircleThickness
+local currentTarget = nil
+local aimbotEnabled = true
+local toggleState = false  -- Variable to keep track of toggle state
+local debounce = false  -- Debounce variable
 
-local function GetClosestPlayer()
-	local MaximumDistance = _G.CircleRadius
-	local Target = nil
+local function getClosest(cframe)
+    local ray = Ray.new(cframe.Position, cframe.LookVector).Unit
+    local target = nil
+    local mag = math.huge
+    local screenCenter = workspace.CurrentCamera.ViewportSize / 2
 
-	for _, v in next, Players:GetPlayers() do
-		if v.Name ~= LocalPlayer.Name then
-			if _G.TeamCheck == true then
-				if v.Team ~= LocalPlayer.Team then
-					if v.Character ~= nil then
-						if v.Character:FindFirstChild("HumanoidRootPart") ~= nil then
-							if v.Character:FindFirstChild("Humanoid") ~= nil and v.Character:FindFirstChild("Humanoid").Health ~= 0 then
-								local ScreenPoint = Camera:WorldToScreenPoint(v.Character:WaitForChild("HumanoidRootPart", math.huge).Position)
-								local VectorDistance = (Vector2.new(UserInputService:GetMouseLocation().X, UserInputService:GetMouseLocation().Y) - Vector2.new(ScreenPoint.X, ScreenPoint.Y)).Magnitude
-								
-								if VectorDistance < MaximumDistance then
-									Target = v
-								end
-							end
-						end
-					end
-				end
-			else
-				if v.Character ~= nil then
-					if v.Character:FindFirstChild("HumanoidRootPart") ~= nil then
-						if v.Character:FindFirstChild("Humanoid") ~= nil and v.Character:FindFirstChild("Humanoid").Health ~= 0 then
-							local ScreenPoint = Camera:WorldToScreenPoint(v.Character:WaitForChild("HumanoidRootPart", math.huge).Position)
-							local VectorDistance = (Vector2.new(UserInputService:GetMouseLocation().X, UserInputService:GetMouseLocation().Y) - Vector2.new(ScreenPoint.X, ScreenPoint.Y)).Magnitude
-							
-							if VectorDistance < MaximumDistance then
-								Target = v
-							end
-						end
-					end
-				end
-			end
-		end
-	end
+    for i, v in pairs(Players:GetPlayers()) do
+        if v.Character and v.Character:FindFirstChild(lockPart) and v.Character:FindFirstChild("Humanoid") and v.Character:FindFirstChild("HumanoidRootPart") and v ~= Players.LocalPlayer and (v.Team ~= Players.LocalPlayer.Team or (not teamCheck)) then
+            local screenPoint, onScreen = workspace.CurrentCamera:WorldToViewportPoint(v.Character[lockPart].Position)
+            local distanceFromCenter = (Vector2.new(screenPoint.X, screenPoint.Y) - screenCenter).Magnitude
 
-	return Target
+            if onScreen and distanceFromCenter <= fov then
+                local magBuf = (v.Character[lockPart].Position - ray:ClosestPoint(v.Character[lockPart].Position)).Magnitude
+
+                if magBuf < mag then
+                    mag = magBuf
+                    target = v
+                end
+            end
+        end
+    end
+
+    return target
 end
 
-UserInputService.InputBegan:Connect(function(Input)
-    if Input.UserInputType == Enum.UserInputType.MouseButton2 then
-        Holding = true
+local function updateFOVRing()
+    FOVring.Position = workspace.CurrentCamera.ViewportSize / 2
+end
+
+local function highlightTarget(target)
+    if highlightEnabled and target and target.Character then
+        local highlight = Instance.new("Highlight")
+        highlight.Adornee = target.Character
+        highlight.FillColor = Color3.fromRGB(255, 128, 128)
+        highlight.OutlineColor = Color3.fromRGB(255, 0, 0)
+        highlight.Parent = target.Character
     end
-end)
+end
 
-UserInputService.InputEnded:Connect(function(Input)
-    if Input.UserInputType == Enum.UserInputType.MouseButton2 then
-        Holding = false
+local function removeHighlight(target)
+    if highlightEnabled and target and target.Character and target.Character:FindFirstChildOfClass("Highlight") then
+        target.Character:FindFirstChildOfClass("Highlight"):Destroy()
     end
-end)
+end
 
-RunService.RenderStepped:Connect(function()
-    FOVCircle.Position = Vector2.new(UserInputService:GetMouseLocation().X, UserInputService:GetMouseLocation().Y)
-    FOVCircle.Radius = _G.CircleRadius
-    FOVCircle.Filled = _G.CircleFilled
-    FOVCircle.Color = _G.CircleColor
-    FOVCircle.Visible = _G.CircleVisible
-    FOVCircle.Radius = _G.CircleRadius
-    FOVCircle.Transparency = _G.CircleTransparency
-    FOVCircle.NumSides = _G.CircleSides
-    FOVCircle.Thickness = _G.CircleThickness
+local function predictPosition(target)
+    if target and target.Character and target.Character:FindFirstChild("HumanoidRootPart") then
+        local velocity = target.Character.HumanoidRootPart.Velocity
+        local position = target.Character[lockPart].Position
+        local predictedPosition = position + (velocity * predictionFactor)
+        return predictedPosition
+    end
+    return nil
+end
 
-    if Holding == true and _G.AimbotEnabled == true then
-        TweenService:Create(Camera, TweenInfo.new(_G.Sensitivity, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), {CFrame = CFrame.new(Camera.CFrame.Position, GetClosestPlayer().Character[_G.AimPart].Position)}):Play()
+local function handleToggle()
+    if debounce then return end
+    debounce = true
+    toggleState = not toggleState
+    wait(0.3)  -- Debounce time to prevent multiple toggles
+    debounce = false
+end
+
+loop = RunService.RenderStepped:Connect(function()
+    if aimbotEnabled then
+        updateFOVRing()
+
+        local localPlayer = Players.LocalPlayer.Character
+        local cam = workspace.CurrentCamera
+        local screenCenter = workspace.CurrentCamera.ViewportSize / 2
+
+        if Toggle then
+            if UserInputService:IsKeyDown(ToggleKey) then
+                handleToggle()
+            end
+        else
+            toggleState = UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton2)
+        end
+
+        if toggleState then
+            if not currentTarget then
+                currentTarget = getClosest(cam.CFrame)
+                highlightTarget(currentTarget)  -- Highlight the new target if enabled
+            end
+
+            if currentTarget and currentTarget.Character and currentTarget.Character:FindFirstChild(lockPart) then
+                local predictedPosition = predictPosition(currentTarget)
+                if predictedPosition then
+                    workspace.CurrentCamera.CFrame = workspace.CurrentCamera.CFrame:Lerp(CFrame.new(cam.CFrame.Position, predictedPosition), smoothing)
+                end
+                FOVring.Color = Color3.fromRGB(0, 255, 0)  -- Change FOV ring color to green when locked onto a target
+            else
+                FOVring.Color = Color3.fromRGB(255, 128, 128)  -- Revert FOV ring color to original when not locked onto a target
+            end
+        else
+            if currentTarget and highlightEnabled then
+                removeHighlight(currentTarget)  -- Remove highlight from the old target
+            end
+            currentTarget = nil
+            FOVring.Color = Color3.fromRGB(255, 128, 128)  -- Revert FOV ring color to original when not locked onto a target
+        end
     end
 end)
