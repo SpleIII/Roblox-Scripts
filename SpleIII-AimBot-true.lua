@@ -5,7 +5,7 @@ local predictionFactor = 0.08  -- Adjust this factor to improve prediction accur
 local highlightEnabled = false  -- Variable to enable or disable target highlighting. Change to False if using an ESP script.
 local lockPart = "HumanoidRootPart"  -- Choose what part it locks onto. Ex. HumanoidRootPart or Head
 
-local Toggle = false  -- Enable or disable toggle mode
+local Toggle = true  -- Enable or disable toggle mode
 local ToggleKey = Enum.KeyCode.Y  -- Choose the key for toggling aimbot lock
 
 local RunService = game:GetService("RunService")
