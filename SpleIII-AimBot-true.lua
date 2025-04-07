@@ -6,7 +6,7 @@ local highlightEnabled = false  -- Variable to enable or disable target highligh
 local lockPart = "HumanoidRootPart"  -- Choose what part it locks onto. Ex. HumanoidRootPart or Head
 
 local Toggle = true  -- Enable or disable toggle mode
-local ToggleKey = Enum.KeyCode.Y  -- Choose the key for toggling aimbot lock
+local ToggleKey = Enum.KeyCode.H  -- Choose the key for toggling aimbot lock
 
 local RunService = game:GetService("RunService")
 local UserInputService = game:GetService("UserInputService")
