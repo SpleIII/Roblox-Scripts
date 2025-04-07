@@ -146,10 +146,8 @@ Cheats:NewButton("ВХ", "", function(state)
     AddNotification('Читы','WallHack - Включён')
 end)
 
-Cheats:NewButton("АимБот (Y)", "", function()
-	getgenv().AddNotification = function(title, text) game:GetService'StarterGui':SetCore("SendNotification", {Title = title; Text = text;}) end
+Cheats:NewButton("АимБот (H)", "", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/SpleIII/Roblox-Scripts/refs/heads/main/SpleIII-AimBot-true.lua"))()
-	AddNotification('Читы','AimBot - Включён')
 end)
 
 -- Прочие скрипты
