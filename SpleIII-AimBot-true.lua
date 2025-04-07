@@ -1,6 +1,6 @@
 local teamCheck = false
 local fov = 90
-local smoothing = 0.02
+local smoothing = 1
 local predictionFactor = 0.08  -- Adjust this factor to improve prediction accuracy
 local highlightEnabled = false  -- Variable to enable or disable target highlighting. Change to False if using an ESP script.
 local lockPart = "HumanoidRootPart"  -- Choose what part it locks onto. Ex. HumanoidRootPart or Head
