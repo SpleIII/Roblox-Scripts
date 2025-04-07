@@ -65,15 +65,15 @@ end
 UserInputService.InputBegan:Connect(function(input, gameProcessed)
     if not gameProcessed and input.KeyCode == Enum.KeyCode.B then
         flying = not flying
+		AddNotification('Читы','Флай - Включён')
         if flying then
             workspace.Gravity = 0 
             fly() 
-            AddNotification('Флай','Флай - Выключен')
+			AddNotification('Читы','Флай - Выключен')
         else
             flySpeed = 100 
             HumanoidRootPart.Velocity = Vector3.new(0, 0, 0)
             workspace.Gravity = originalGravity
-            AddNotification('Флай','Флай - Включён')
         end
     end
 end)
@@ -144,6 +144,12 @@ Cheats:NewButton("ВХ", "", function(state)
     getgenv().AddNotification = function(title, text) game:GetService'StarterGui':SetCore("SendNotification", {Title = title; Text = text;}) end
     loadstring(game:HttpGet("https://raw.githubusercontent.com/SpleIII/Roblox-Scripts/refs/heads/main/SpleIII-ESP-True.lua"))()
     AddNotification('Читы','WallHack - Включён')
+end)
+
+Cheats:NewButton("АимБот (Y)", "", function()
+	getgenv().AddNotification = function(title, text) game:GetService'StarterGui':SetCore("SendNotification", {Title = title; Text = text;}) end
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/SpleIII/Roblox-Scripts/refs/heads/main/SpleIII-AimBot-true.lua"))()
+	AddNotification('Читы','AimBot - Включён')
 end)
 
 -- Прочие скрипты
@@ -506,7 +512,7 @@ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1291.87,
 elseif drop == "75 Chocolate" then
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1291.87, 3.66619503, 49.08043694, 1, 0, 0, 0, 1, 0, 0, 0, 1)
 elseif drop == "125 Chocolate" then
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1291.87, 3.66619503, 56.08043694, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+game.Players.LocalPlayer.Chaвracter.HumanoidRootPart.CFrame = CFrame.new(1291.87, 3.66619503, 56.08043694, 1, 0, 0, 0, 1, 0, 0, 0, 1)
 elseif drop == "300 Chocolate" then
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1291.87, 3.66619503, 63.08043694, 1, 0, 0, 0, 1, 0, 0, 0, 1)
 elseif drop == "500 Chocolate" then
