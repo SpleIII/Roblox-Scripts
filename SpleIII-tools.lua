@@ -69,7 +69,7 @@ UserInputService.InputBegan:Connect(function(input, gameProcessed)
         if flying then
             workspace.Gravity = 0 
             fly() 
-			AddNotification('Читы','Флай - Выключен')
+			AddNotification('Читы','Флай - Выключён')
         else
             flySpeed = 100 
             HumanoidRootPart.Velocity = Vector3.new(0, 0, 0)
@@ -146,7 +146,7 @@ Cheats:NewButton("ВХ", "", function(state)
     AddNotification('Читы','WallHack - Включён')
 end)
 
-Cheats:NewButton("АимБот", "", function()
+Cheats:NewButton("АимБот (Y)", "", function()
 	getgenv().AddNotification = function(title, text) game:GetService'StarterGui':SetCore("SendNotification", {Title = title; Text = text;}) end
     loadstring(game:HttpGet("https://raw.githubusercontent.com/SpleIII/Roblox-Scripts/refs/heads/main/SpleIII-AimBot-true.lua"))()
 	AddNotification('Читы','AimBot - Включён')
@@ -512,7 +512,7 @@ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1291.87,
 elseif drop == "75 Chocolate" then
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1291.87, 3.66619503, 49.08043694, 1, 0, 0, 0, 1, 0, 0, 0, 1)
 elseif drop == "125 Chocolate" then
-game.Players.LocalPlayer.Chaвracter.HumanoidRootPart.CFrame = CFrame.new(1291.87, 3.66619503, 56.08043694, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1291.87, 3.66619503, 56.08043694, 1, 0, 0, 0, 1, 0, 0, 0, 1)
 elseif drop == "300 Chocolate" then
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1291.87, 3.66619503, 63.08043694, 1, 0, 0, 0, 1, 0, 0, 0, 1)
 elseif drop == "500 Chocolate" then
