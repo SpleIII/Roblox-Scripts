@@ -14,7 +14,7 @@ local StarterGui = game:GetService("StarterGui")
 local Players = game:GetService("Players")
 
 getgenv().AddNotification = function(title, text) game:GetService'StarterGui':SetCore("SendNotification", {Title = title; Text = text;}) end
-    AddNotification('Читы','AimBot - Включён')
+    AddNotification('Читы','AimBot - Выключен')
 
 local FOVring = Drawing.new("Circle")
 FOVring.Visible = false
