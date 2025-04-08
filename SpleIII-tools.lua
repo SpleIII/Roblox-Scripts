@@ -121,20 +121,14 @@ end)
 -- Скрипт для шутеров
 
 local Cheats = Cheats:NewSection("Скрипты для шутеров")
-Cheats:NewToggle("ВаллХак", "", function(state)
-if state then
+Cheats:NewButton("ВаллХак", "", function()
     getgenv().AddNotification = function(title, text) game:GetService'StarterGui':SetCore("SendNotification", {Title = title; Text = text;}) end
     loadstring(game:HttpGet("https://raw.githubusercontent.com/SpleIII/Roblox-Scripts/refs/heads/main/SpleIII-ESP-True.lua"))()
     AddNotification('Читы','WallHack - Включён')
-else
-    getgenv().AddNotification = function(title, text) game:GetService'StarterGui':SetCore("SendNotification", {Title = title; Text = text;}) end
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/SpleIII/Roblox-Scripts/refs/heads/main/SpleIII-ESP-False.lua"))()
-    AddNotification('Читы','WallHack - Выключен')
-end
 end)
 
 
-Cheats:NewButton("АимБот (MB4)", "", function(state)
+Cheats:NewToggle("АимБот (MB4)", "", function(state)
 if state then
     loadstring(game:HttpGet("https://raw.githubusercontent.com/SpleIII/Roblox-Scripts/refs/heads/main/SpleIII-AimBot-false.lua"))()
 else
@@ -166,12 +160,6 @@ end)
 
 Misc:NewButton("Телепортироваться к игроку", " ", function()
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[Select].Character.HumanoidRootPart.CFrame
-end)
-
--- Настройки
-local MultiplierSimulatorX = MultiplierSimulatorX:NewSection("Настройки скрипта")
-Settings:NewKeybind("Переключатель UI", "Переключает видимочть UI", Enum.KeyCode.RightShift, function()
-	Library:ToggleUI()
 end)
 
 -- Скрипт для режима [🔥39M] Multiplier Simulator X
@@ -525,6 +513,13 @@ elseif drop == "15000 Chocolate" then
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1291.87, 3.66619503, 105.08043694, 1, 0, 0, 0, 1, 0, 0, 0, 1)
 end
 end)
+
+-- Настройки
+local MultiplierSimulatorX = MultiplierSimulatorX:NewSection("Настройки скрипта")
+Settings:NewKeybind("Переключатель UI", "Переключает видимочть UI", Enum.KeyCode.RightShift, function()
+	Library:ToggleUI()
+end)
+
 
 -- Ссылки для помощи
 local Socials = Socials:NewSection("Вспомогательные ссылки")
