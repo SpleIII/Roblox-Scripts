@@ -1,5 +1,5 @@
 local teamCheck = false
-local fov = 90
+local fov = 120
 local smoothing = 1
 local predictionFactor = 0.  -- Adjust this factor to improve prediction accuracy
 local highlightEnabled = true  -- Variable to enable or disable target highlighting. Change to False if using an ESP script.
