@@ -4,8 +4,8 @@ game:GetService('RunService').Stepped:connect(function()
 if noclip then
 game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
 end
-AddNotification('Читы','Ноуклип - Включён')
 end)
+AddNotification('Читы','Ноуклип - Включён')
 plr = game.Players.LocalPlayer
 mouse = plr:GetMouse()
 mouse.KeyDown:connect(function(key)
@@ -14,6 +14,5 @@ if key == "n" then
 noclip = not noclip
 game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
 end
-AddNotification('Читы','Ноуклип - Выключен')
 end)
-
+AddNotification('Читы','Ноуклип - Выключен')
