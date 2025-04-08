@@ -6,6 +6,7 @@ local Section = Window:NewTab("Функции")
 local Cheats = Window:NewTab("Читерские штучки")
 local Misc = Window:NewTab("Прочее")
 local MultiplierSimulatorX = Window:NewTab("Multiplier Simulator X")
+local Settings = Window:NewTab("Настройки")
 local Socials = Window:NewTab("Ссылки")
 
 -- Скрипт для всех режимов
@@ -165,6 +166,12 @@ end)
 
 Misc:NewButton("Телепортироваться к игроку", " ", function()
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[Select].Character.HumanoidRootPart.CFrame
+end)
+
+-- Настройки
+local MultiplierSimulatorX = MultiplierSimulatorX:NewSection("Настройки скрипта")
+Settings:NewKeybind("Переключатель UI", "Переключает видимочть UI", Enum.KeyCode.RightShift, function()
+	Library:ToggleUI()
 end)
 
 -- Скрипт для режима [🔥39M] Multiplier Simulator X
