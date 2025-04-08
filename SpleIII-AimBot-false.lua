@@ -1,9 +1,9 @@
 local teamCheck = false
-local fov = 90
+local fov = 0
 local smoothing = 1
 local predictionFactor = 0.08  -- Adjust this factor to improve prediction accuracy
 local highlightEnabled = false  -- Variable to enable or disable target highlighting. Change to False if using an ESP script.
-local lockPart = "HumanoidRootPart"  -- Choose what part it locks onto. Ex. HumanoidRootPart or Head
+local lockPart = "Head"  -- Choose what part it locks onto. Ex. HumanoidRootPart or Head
 
 local Toggle = true  -- Enable or disable toggle mode
 local ToggleKey = Enum.KeyCode.MouseButton4  -- Choose the key for toggling aimbot lock
@@ -25,7 +25,7 @@ FOVring.Color = Color3.fromRGB(255, 128, 128)
 FOVring.Position = workspace.CurrentCamera.ViewportSize / 2
 
 local currentTarget = nil
-local aimbotEnabled = true
+local aimbotEnabled = false
 local toggleState = false  -- Variable to keep track of toggle state
 local debounce = false  -- Debounce variable
 
