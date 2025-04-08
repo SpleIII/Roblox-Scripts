@@ -80,28 +80,8 @@ end)
 end)
 
 Section:NewButton("Включить Ноуклип (N)", "Включить/Выключить режим ноуклипа (N)", function()
-	getgenv().AddNotification = function(title, text) game:GetService'StarterGui':SetCore("SendNotification", {Title = title; Text = text;}) end
-        noclip = false
-game:GetService('RunService').Stepped:connect(function()
-if noclip then
-game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
-end
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/SpleIII/Roblox-Scripts/refs/heads/main/SpleIII-Noclip.lua"))()
 end)
-plr = game.Players.LocalPlayer
-mouse = plr:GetMouse()
-mouse.KeyDown:connect(function(key)
- 
-if key == "n" then
-noclip = not noclip
-game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
-end
-end)
-print('Loaded')
-print('Press "E" to noclip')
-		AddNotification('Ноуклип','Ноуклип - '..tostring(Noclip))
-end)
-
-
 Section:NewSlider("Скорость бега", "Изменить скорость бега", 250, 0, function(s) -- 500 (Макс. значение) | 0 (Мин. значение)
     game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
 end)
@@ -140,14 +120,25 @@ end)
 -- Скрипт для шутеров
 
 local Cheats = Cheats:NewSection("Скрипты для шутеров")
-Cheats:NewButton("ВХ", "", function(state)
+Cheats:NewToggle("ВаллХак", "", function(state)
+if state then
     getgenv().AddNotification = function(title, text) game:GetService'StarterGui':SetCore("SendNotification", {Title = title; Text = text;}) end
     loadstring(game:HttpGet("https://raw.githubusercontent.com/SpleIII/Roblox-Scripts/refs/heads/main/SpleIII-ESP-True.lua"))()
     AddNotification('Читы','WallHack - Включён')
+else
+    getgenv().AddNotification = function(title, text) game:GetService'StarterGui':SetCore("SendNotification", {Title = title; Text = text;}) end
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/SpleIII/Roblox-Scripts/refs/heads/main/SpleIII-ESP-False.lua"))()
+    AddNotification('Читы','WallHack - Выключен')
+end
 end)
 
-Cheats:NewButton("АимБот (H)", "", function()
+
+Cheats:NewButton("АимБот (MB4)", "", function(state)
+if state then
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/SpleIII/Roblox-Scripts/refs/heads/main/SpleIII-AimBot-false.lua"))()
+else
     loadstring(game:HttpGet("https://raw.githubusercontent.com/SpleIII/Roblox-Scripts/refs/heads/main/SpleIII-AimBot-true.lua"))()
+end
 end)
 
 -- Прочие скрипты
