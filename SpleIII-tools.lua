@@ -515,7 +515,7 @@ end
 end)
 
 -- Настройки
-local MultiplierSimulatorX = MultiplierSimulatorX:NewSection("Настройки скрипта")
+local Settings = Settings:NewSection("Настройки скрипта")
 Settings:NewKeybind("Переключатель UI", "Переключает видимочть UI", Enum.KeyCode.RightShift, function()
 	Library:ToggleUI()
 end)
