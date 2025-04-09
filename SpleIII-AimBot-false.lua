@@ -4,7 +4,7 @@ local userInputService = game:GetService("UserInputService")
 local runService = game:GetService("RunService")
  
 local aimbotEnabled = false
-local aimKey = Enum.KeyCode.F
+local aimKey = Enum.KeyCode.H
 local aimPart = "Head" -- Change this to the part you want to aim at
  
 local function getClosestPlayer()
