@@ -1,134 +1,49 @@
-local teamCheck = false
-local fov = 0
-local smoothing = 1
-local predictionFactor = 0  -- Adjust this factor to improve prediction accuracy
-local highlightEnabled = false  -- Variable to enable or disable target highlighting. Change to False if using an ESP script.
-local lockPart = "Head"  -- Choose what part it locks onto. Ex. HumanoidRootPart or Head
-
-local Toggle = true  -- Enable or disable toggle mode
-local ToggleKey = Enum.KeyCode.F  -- Choose the key for toggling aimbot lock
-
-local RunService = game:GetService("RunService")
-local UserInputService = game:GetService("UserInputService")
-local StarterGui = game:GetService("StarterGui")
-local Players = game:GetService("Players")
-
-getgenv().AddNotification = function(title, text) game:GetService'StarterGui':SetCore("SendNotification", {Title = title; Text = text;}) end
-    AddNotification('Читы','AimBot - Выключен')
-
-local FOVring = Drawing.new("Circle")
-FOVring.Visible = false
-FOVring.Thickness = 1
-FOVring.Radius = fov
-FOVring.Transparency = 0.8
-FOVring.Color = Color3.fromRGB(255, 128, 128)
-FOVring.Position = workspace.CurrentCamera.ViewportSize / 2
-
-local currentTarget = nil
+local player = game.Players.LocalPlayer
+local camera = game.Workspace.CurrentCamera
+local userInputService = game:GetService("UserInputService")
+local runService = game:GetService("RunService")
+ 
 local aimbotEnabled = false
-local toggleState = false  -- Variable to keep track of toggle state
-local debounce = false  -- Debounce variable
-
-local function getClosest(cframe)
-    local ray = Ray.new(cframe.Position, cframe.LookVector).Unit
-    local target = nil
-    local mag = math.huge
-    local screenCenter = workspace.CurrentCamera.ViewportSize / 2
-
-    for i, v in pairs(Players:GetPlayers()) do
-        if v.Character and v.Character:FindFirstChild(lockPart) and v.Character:FindFirstChild("Humanoid") and v.Character:FindFirstChild("HumanoidRootPart") and v ~= Players.LocalPlayer and (v.Team ~= Players.LocalPlayer.Team or (not teamCheck)) then
-            local screenPoint, onScreen = workspace.CurrentCamera:WorldToViewportPoint(v.Character[lockPart].Position)
-            local distanceFromCenter = (Vector2.new(screenPoint.X, screenPoint.Y) - screenCenter).Magnitude
-
-            if onScreen and distanceFromCenter <= fov then
-                local magBuf = (v.Character[lockPart].Position - ray:ClosestPoint(v.Character[lockPart].Position)).Magnitude
-
-                if magBuf < mag then
-                    mag = magBuf
-                    target = v
-                end
+local aimKey = Enum.KeyCode.F
+local aimPart = "Head" -- Change this to the part you want to aim at
+ 
+local function getClosestPlayer()
+    local closestPlayer = nil
+    local shortestDistance = math.huge
+ 
+    for _, v in pairs(game.Players:GetPlayers()) do
+        if v ~= player and v.Character and v.Character:FindFirstChild(aimPart) then
+            local partPos = camera:WorldToViewportPoint(v.Character[aimPart].Position)
+            local mousePos = userInputService:GetMouseLocation()
+            local distance = (Vector2.new(partPos.X, partPos.Y) - mousePos).magnitude
+ 
+            if distance < shortestDistance then
+                closestPlayer = v
+                shortestDistance = distance
             end
         end
     end
-
-    return target
+ 
+    return closestPlayer
 end
-
-local function updateFOVRing()
-    FOVring.Position = workspace.CurrentCamera.ViewportSize / 2
-end
-
-local function highlightTarget(target)
-    if highlightEnabled and target and target.Character then
-        local highlight = Instance.new("Highlight")
-        highlight.Adornee = target.Character
-        highlight.FillColor = Color3.fromRGB(255, 128, 128)
-        highlight.OutlineColor = Color3.fromRGB(255, 0, 0)
-        highlight.Parent = target.Character
+ 
+userInputService.InputBegan:Connect(function(input)
+    if input.KeyCode == aimKey then
+        aimbotEnabled = false
     end
-end
-
-local function removeHighlight(target)
-    if highlightEnabled and target and target.Character and target.Character:FindFirstChildOfClass("Highlight") then
-        target.Character:FindFirstChildOfClass("Highlight"):Destroy()
+end)
+ 
+userInputService.InputEnded:Connect(function(input)
+    if input.KeyCode == aimKey then
+        aimbotEnabled = false
     end
-end
-
-local function predictPosition(target)
-    if target and target.Character and target.Character:FindFirstChild("HumanoidRootPart") then
-        local velocity = target.Character.HumanoidRootPart.Velocity
-        local position = target.Character[lockPart].Position
-        local predictedPosition = position + (velocity * predictionFactor)
-        return predictedPosition
-    end
-    return nil
-end
-
-local function handleToggle()
-    if debounce then return end
-    debounce = true
-    toggleState = not toggleState
-    wait(0.3)  -- Debounce time to prevent multiple toggles
-    debounce = false
-end
-
-loop = RunService.RenderStepped:Connect(function()
+end)
+ 
+runService.RenderStepped:Connect(function()
     if aimbotEnabled then
-        updateFOVRing()
-
-        local localPlayer = Players.LocalPlayer.Character
-        local cam = workspace.CurrentCamera
-        local screenCenter = workspace.CurrentCamera.ViewportSize / 2
-
-        if Toggle then
-            if UserInputService:IsKeyDown(ToggleKey) then
-                handleToggle()
-            end
-        else
-            toggleState = UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton2)
-        end
-
-        if toggleState then
-            if not currentTarget then
-                currentTarget = getClosest(cam.CFrame)
-                highlightTarget(currentTarget)  -- Highlight the new target if enabled
-            end
-
-            if currentTarget and currentTarget.Character and currentTarget.Character:FindFirstChild(lockPart) then
-                local predictedPosition = predictPosition(currentTarget)
-                if predictedPosition then
-                    workspace.CurrentCamera.CFrame = workspace.CurrentCamera.CFrame:Lerp(CFrame.new(cam.CFrame.Position, predictedPosition), smoothing)
-                end
-                FOVring.Color = Color3.fromRGB(0, 255, 0)  -- Change FOV ring color to green when locked onto a target
-            else
-                FOVring.Color = Color3.fromRGB(255, 128, 128)  -- Revert FOV ring color to original when not locked onto a target
-            end
-        else
-            if currentTarget and highlightEnabled then
-                removeHighlight(currentTarget)  -- Remove highlight from the old target
-            end
-            currentTarget = nil
-            FOVring.Color = Color3.fromRGB(255, 128, 128)  -- Revert FOV ring color to original when not locked onto a target
+        local closestPlayer = getClosestPlayer()
+        if closestPlayer and closestPlayer.Character and closestPlayer.Character:FindFirstChild(aimPart) then
+            camera.CFrame = CFrame.new(camera.CFrame.Position, closestPlayer.Character[aimPart].Position)
         end
     end
 end)
