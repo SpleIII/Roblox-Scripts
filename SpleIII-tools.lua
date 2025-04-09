@@ -128,12 +128,8 @@ Cheats:NewButton("ВаллХак", "", function()
 end)
 
 
-Cheats:NewToggle("АимБот (F)", "", function(state)
-if state then
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/SpleIII/Roblox-Scripts/refs/heads/main/SpleIII-AimBot-false.lua"))()
-else
+Cheats:NewButton("АимБот (F)", "", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/SpleIII/Roblox-Scripts/refs/heads/main/SpleIII-AimBot-true.lua"))()
-end
 end)
 
 -- Прочие скрипты
