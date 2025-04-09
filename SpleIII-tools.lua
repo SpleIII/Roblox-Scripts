@@ -1,5 +1,10 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/SpleIII/Roblox-Scripts/refs/heads/main/SpleIII-UI.lua"))()
 local Window = Library.CreateLib("SpleIII Tools", "Serpent")
+local sound = Instance.new("Sound", game.Workspace)
+sound.Volume = 10
+sound.SoundId = "rbxassetid://18379039436" 
+sound.Looped = false
+sound:Play()
 
 -- Вкладки
 local Section = Window:NewTab("Функции")
@@ -519,7 +524,13 @@ Settings:NewKeybind("Переключатель UI", "Переключает в�
 	Library:ToggleUI()
 end)
 Settings:NewButton("Перезайти в режим (Шанс вылета)", " ", function()
-    game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
+    local sound = Instance.new("Sound", game.Workspace)
+sound.Volume = 1
+sound.SoundId = "rbxassetid://123821894082707" 
+sound.Looped = false
+sound:Play()
+wait(0.75)
+game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
 end)
 
 -- Ссылки для помощи
