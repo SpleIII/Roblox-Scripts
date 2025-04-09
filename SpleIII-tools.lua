@@ -4,8 +4,8 @@ local Window = Library.CreateLib("SpleIII Tools", "Serpent")
 -- Вкладки
 local Section = Window:NewTab("Функции")
 local Cheats = Window:NewTab("Читерские штучки")
-local Misc = Window:NewTab("Прочее")
 local MultiplierSimulatorX = Window:NewTab("Multiplier Simulator X")
+local Misc = Window:NewTab("Прочее")
 local Settings = Window:NewTab("Настройки")
 local Socials = Window:NewTab("Ссылки")
 
@@ -130,32 +130,6 @@ end)
 
 Cheats:NewButton("АимБот (F)", "", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/SpleIII/Roblox-Scripts/refs/heads/main/SpleIII-AimBot-true.lua"))()
-end)
-
--- Прочие скрипты
-
-local Misc = Misc:NewSection("Телепорт к игрокам")
-
-players = {}
-
-for i,v in pairs(game:GetService("Players"):GetChildren()) do
-   table.insert(players,v.Name)
-end
-
-Misc:NewDropdown("Выбрать игрока для телепортации", " ", players, function(abc)
-    Select = abc
-end)
-
-
-Misc:NewButton("Обновить список", " ", function()
-    table.clear(players)
-for i,v in pairs(game:GetService("Players"):GetChildren()) do
-   table.insert(players,v.Name)
-end
-end)
-
-Misc:NewButton("Телепортироваться к игроку", " ", function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[Select].Character.HumanoidRootPart.CFrame
 end)
 
 -- Скрипт для режима [🔥39M] Multiplier Simulator X
@@ -510,12 +484,41 @@ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1291.87,
 end
 end)
 
+-- Прочие скрипты
+
+local Misc = Misc:NewSection("Телепорт к игрокам")
+
+players = {}
+
+for i,v in pairs(game:GetService("Players"):GetChildren()) do
+   table.insert(players,v.Name)
+end
+
+Misc:NewDropdown("Выбрать игрока для телепортации", " ", players, function(abc)
+    Select = abc
+end)
+
+
+Misc:NewButton("Обновить список", " ", function()
+    table.clear(players)
+for i,v in pairs(game:GetService("Players"):GetChildren()) do
+   table.insert(players,v.Name)
+end
+end)
+
+Misc:NewButton("Телепортироваться к игроку", " ", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[Select].Character.HumanoidRootPart.CFrame
+end)
+
+
 -- Настройки
 local Settings = Settings:NewSection("Настройки скрипта")
 Settings:NewKeybind("Переключатель UI", "Переключает видимочть UI", Enum.KeyCode.RightShift, function()
 	Library:ToggleUI()
 end)
-
+Settings:NewButton("Перезайти в режим (Шанс вылета)", " ", function()
+    game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
+end)
 
 -- Ссылки для помощи
 local Socials = Socials:NewSection("Вспомогательные ссылки")
