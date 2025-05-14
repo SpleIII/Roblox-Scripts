@@ -1,10 +1,6 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/SpleIII/Roblox-Scripts/refs/heads/main/SpleIII-UI.lua"))()
 local Window = Library.CreateLib("SpleIII Tools", "Serpent")
 local sound = Instance.new("Sound", game.Workspace)
-sound.Volume = 10
-sound.SoundId = "rbxassetid://18379039436" 
-sound.Looped = false
-sound:Play()
 
 -- Вкладки
 local Section = Window:NewTab("Функции")
@@ -92,7 +88,7 @@ Section:NewButton("Включить Ноуклип (N)", "Включить/Вы�
 end)
 
 Section:NewButton("Включить свободную камеру (Shift + P)", "Включить/Выключить режим свободной камеры (Shift + P)", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/SpleIII/Roblox-Scripts/refs/heads/main/SpleIII-Freecam.lua"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/SpleIII/Roblox-Scripts/refs/heads/main/Freecam.lua"))()
 end)
 
 Section:NewSlider("Скорость бега", "Изменить скорость бега", 250, 0, function(s) -- 500 (Макс. значение) | 0 (Мин. значение)
@@ -190,7 +186,7 @@ ESP:AddObjectListener(Workspace.Hemp, { -- Object Path, For example: Workspace.T
 ESP.whatever = true
 end)
 
-Rost.NewButton("Серная руда", "", function()
+Rost:NewButton("Серная руда", "", function()
 local ESP = loadstring(game:HttpGet("https://kiriot22.com/releases/ESP.lua"))()
 ESP.Players = false
 ESP.Boxes = false
@@ -205,7 +201,7 @@ ESP:AddObjectListener(Workspace.ores, { -- Object Path, For example: Workspace.T
 ESP.whatever = true
 end)
 
-Rost.newButton("Камень", "", function()
+Rost:NewButton("Камень", "", function()
 local ESP = loadstring(game:HttpGet("https://kiriot22.com/releases/ESP.lua"))()
 ESP.Players = false
 ESP.Boxes = false
@@ -220,7 +216,7 @@ ESP:AddObjectListener(Workspace.ores, { -- Object Path, For example: Workspace.T
 ESP.whatever = true
 end)
 
-Rost.newButton("Железная руда", "", function()
+Rost:NewButton("Железная руда", "", function()
 local ESP = loadstring(game:HttpGet("https://kiriot22.com/releases/ESP.lua"))()
 ESP.Players = false
 ESP.Boxes = false
@@ -235,11 +231,11 @@ ESP:AddObjectListener(Workspace.ores, { -- Object Path, For example: Workspace.T
 ESP.whatever = true
 end)
 
-Rost.newButton("Военный ящик (Может вызвать лаги)", "", function()
+Rost:NewButton("Военный ящик (Может вызвать лаги)", "", function()
   loadstring(game:HttpGet('https://pastebin.com/raw/txZYECdu'))()
 end)
 
-Rost.newButton("loot crate (Может вызвать лаги)", "", function()
+Rost:NewButton("loot crate (Может вызвать лаги)", "", function()
   loadstring(game:HttpGet('https://pastebin.com/raw/U12AvQcB'))()
 end)
 
