@@ -9,6 +9,7 @@ sound:Play()
 -- Вкладки
 local Section = Window:NewTab("Функции")
 local Cheats = Window:NewTab("Читерские штучки")
+local Rost = Window:NewTab("Rost Alpha")
 local MultiplierSimulatorX = Window:NewTab("Multiplier Simulator X")
 local Misc = Window:NewTab("Прочее")
 local Settings = Window:NewTab("Настройки")
@@ -89,6 +90,11 @@ end)
 Section:NewButton("Включить Ноуклип (N)", "Включить/Выключить режим ноуклипа (N)", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/SpleIII/Roblox-Scripts/refs/heads/main/SpleIII-Noclip.lua"))()
 end)
+
+Section:NewButton("Включить свободную камеру (Shift + P)", "Включить/Выключить режим свободной камеры (Shift + P)", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/SpleIII/Roblox-Scripts/refs/heads/main/SpleIII-Freecam.lua"))()
+end)
+
 Section:NewSlider("Скорость бега", "Изменить скорость бега", 250, 0, function(s) -- 500 (Макс. значение) | 0 (Мин. значение)
     game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
 end)
@@ -112,11 +118,6 @@ end)
 Section:NewSlider("Гравитация", "Изменить гравитацию", 1000, 0, function(g) -- 500 (Макс. значение) | 0 (Мин. значение)
     game.Workspace.Gravity = g
 end)
-Section:NewButton("Сбросить силу прыжка", "Устанавливается сила прыжка на стартовое значение 50", function()
-    getgenv().AddNotification = function(title, text) game:GetService'StarterGui':SetCore("SendNotification", {Title = title; Text = text;}) end
-    game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
-    AddNotification('Сброс','Текущая сила прыжка - 50')
-end)
 
 Section:NewButton("Сбросить гравитацию", "Устанавливается гравитация на стартовое значение 300", function()
     getgenv().AddNotification = function(title, text) game:GetService'StarterGui':SetCore("SendNotification", {Title = title; Text = text;}) end
@@ -138,6 +139,108 @@ Cheats:NewButton("АимБот (H)", "", function()
     getgenv().AddNotification = function(title, text) game:GetService'StarterGui':SetCore("SendNotification", {Title = title; Text = text;}) end
     loadstring(game:HttpGet("https://raw.githubusercontent.com/SpleIII/Roblox-Scripts/refs/heads/main/SpleIII-AimBot-true.lua"))()
     AddNotification('Читы','WallHack - Включён')
+end)
+
+-- Скрипт для режима Rost Alpha
+
+local Rost = Rost:NewSection("ВХ")
+
+Rost:NewButton("Коптер ЕСП", "", function()
+local ESP = loadstring(game:HttpGet("https://kiriot22.com/releases/ESP.lua"))()
+ESP.Players = false
+ESP.Boxes = false
+ESP.Names = true
+ESP:Toggle(true)
+ESP:AddObjectListener(Workspace.Minicopter, { -- Object Path, For example: Workspace.ThisFolder
+    Name = "Base", --Object name inside of the path, for example: Workspace.ThisFolder.Item_1
+    CustomName = "copter", -- Name you want to be displayed
+    Color = Color3.fromRGB(140, 0, 10), -- Color
+    IsEnabled = "whatever" -- Any name, has to be the same as the last line: ESP.TheNameYouWant
+})
+ESP.whatever = true
+end)
+
+Rost:NewButton("Шкафы", "", function()
+local ESP = loadstring(game:HttpGet("https://kiriot22.com/releases/ESP.lua"))()
+ESP.Players = false
+ESP.Boxes = false
+ESP.Names = true
+ESP:Toggle(true)
+ESP:AddObjectListener(Workspace.Builds, { -- Object Path, For example: Workspace.ThisFolder
+    Name = "ToolCupboardModel", --Object name inside of the path, for example: Workspace.ThisFolder.Item_1
+    CustomName = "Wardrobe", -- Name you want to be displayed
+    Color = Color3.fromRGB(0, 200, 150), -- Color
+    IsEnabled = "whatever" -- Any name, has to be the same as the last line: ESP.TheNameYouWant
+})
+ESP.whatever = true
+end)
+
+Rost:NewButton("Конопля", "", function()
+local ESP = loadstring(game:HttpGet("https://kiriot22.com/releases/ESP.lua"))()
+ESP.Players = false
+ESP.Boxes = false
+ESP.Names = true
+ESP:Toggle(true)
+ESP:AddObjectListener(Workspace.Hemp, { -- Object Path, For example: Workspace.ThisFolder
+    Name = "Hemp", --Object name inside of the path, for example: Workspace.ThisFolder.Item_1
+    CustomName = "Hemp", -- Name you want to be displayed
+    Color = Color3.fromRGB(0, 200, 150), -- Color
+    IsEnabled = "whatever" -- Any name, has to be the same as the last line: ESP.TheNameYouWant
+})
+ESP.whatever = true
+end)
+
+Rost.NewButton("Серная руда", "", function()
+local ESP = loadstring(game:HttpGet("https://kiriot22.com/releases/ESP.lua"))()
+ESP.Players = false
+ESP.Boxes = false
+ESP.Names = true
+ESP:Toggle(true)
+ESP:AddObjectListener(Workspace.ores, { -- Object Path, For example: Workspace.ThisFolder
+    Name = "Sulfur", --Object name inside of the path, for example: Workspace.ThisFolder.Item_1
+    CustomName = "Sulfur", -- Name you want to be displayed
+    Color = Color3.fromRGB(0, 200, 150), -- Color
+    IsEnabled = "whatever" -- Any name, has to be the same as the last line: ESP.TheNameYouWant
+})
+ESP.whatever = true
+end)
+
+tab.newButton("Камень", "", function()
+local ESP = loadstring(game:HttpGet("https://kiriot22.com/releases/ESP.lua"))()
+ESP.Players = false
+ESP.Boxes = false
+ESP.Names = true
+ESP:Toggle(true)
+ESP:AddObjectListener(Workspace.ores, { -- Object Path, For example: Workspace.ThisFolder
+    Name = "stone", --Object name inside of the path, for example: Workspace.ThisFolder.Item_1
+    CustomName = "stone", -- Name you want to be displayed
+    Color = Color3.fromRGB(0, 200, 150), -- Color
+    IsEnabled = "whatever" -- Any name, has to be the same as the last line: ESP.TheNameYouWant
+ })
+ESP.whatever = true
+end)
+
+tab.newButton("Железная руда", "", function()
+local ESP = loadstring(game:HttpGet("https://kiriot22.com/releases/ESP.lua"))()
+ESP.Players = false
+ESP.Boxes = false
+ESP.Names = true
+ESP:Toggle(true)
+ESP:AddObjectListener(Workspace.ores, { -- Object Path, For example: Workspace.ThisFolder
+    Name = "iron", --Object name inside of the path, for example: Workspace.ThisFolder.Item_1
+    CustomName = "iron", -- Name you want to be displayed
+    Color = Color3.fromRGB(0, 200, 150), -- Color
+    IsEnabled = "whatever" -- Any name, has to be the same as the last line: ESP.TheNameYouWant
+})
+ESP.whatever = true
+end)
+
+tab.newButton("Военный ящик (Может вызвать лаги)", "", function()
+  loadstring(game:HttpGet('https://pastebin.com/raw/txZYECdu'))()
+end)
+
+tab.newButton("loot crate (Может вызвать лаги)", "", function()
+  loadstring(game:HttpGet('https://pastebin.com/raw/U12AvQcB'))()
 end)
 
 -- Скрипт для режима [🔥39M] Multiplier Simulator X
