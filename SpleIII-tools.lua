@@ -205,7 +205,7 @@ ESP:AddObjectListener(Workspace.ores, { -- Object Path, For example: Workspace.T
 ESP.whatever = true
 end)
 
-tab.newButton("Камень", "", function()
+Rost.newButton("Камень", "", function()
 local ESP = loadstring(game:HttpGet("https://kiriot22.com/releases/ESP.lua"))()
 ESP.Players = false
 ESP.Boxes = false
@@ -220,7 +220,7 @@ ESP:AddObjectListener(Workspace.ores, { -- Object Path, For example: Workspace.T
 ESP.whatever = true
 end)
 
-tab.newButton("Железная руда", "", function()
+Rost.newButton("Железная руда", "", function()
 local ESP = loadstring(game:HttpGet("https://kiriot22.com/releases/ESP.lua"))()
 ESP.Players = false
 ESP.Boxes = false
