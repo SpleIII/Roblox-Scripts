@@ -235,11 +235,11 @@ ESP:AddObjectListener(Workspace.ores, { -- Object Path, For example: Workspace.T
 ESP.whatever = true
 end)
 
-tab.newButton("Военный ящик (Может вызвать лаги)", "", function()
+Rost.newButton("Военный ящик (Может вызвать лаги)", "", function()
   loadstring(game:HttpGet('https://pastebin.com/raw/txZYECdu'))()
 end)
 
-tab.newButton("loot crate (Может вызвать лаги)", "", function()
+Rost.newButton("loot crate (Может вызвать лаги)", "", function()
   loadstring(game:HttpGet('https://pastebin.com/raw/U12AvQcB'))()
 end)
 
