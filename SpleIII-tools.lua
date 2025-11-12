@@ -3,10 +3,10 @@ local Window = Library.CreateLib("SpleIII Tools", "Serpent")
 local sound = Instance.new("Sound", game.Workspace)
 
 -- Вкладки
-local Section = Window:NewTab("Функции")
-local Cheats = Window:NewTab("Читерские штучки")
+local Section = Window:NewTab("Функции (Шанс бана)")
+local Cheats = Window:NewTab("Для шутеров")
 local Rost = Window:NewTab("Rost Alpha")
-local MultiplierSimulatorX = Window:NewTab("Multiplier Simulator X")
+local MultiplierSimulatorX = Window:NewTab("Multiplier Simulator X(Шанс бана)")
 local Misc = Window:NewTab("Прочее")
 local Settings = Window:NewTab("Настройки")
 local Socials = Window:NewTab("Ссылки")
