@@ -1,4 +1,4 @@
-local ESP = loadstring(game:HttpGet("https://raw.githubusercontent.com/linemaster2/esp-library/main/library.lua"))();
+local ESP = loadstring(game:HttpGet("https://raw.githubusercontent.com/SpleIII/Roblox-Scripts/refs/heads/main/ESP/library.lua"))();
 
 --// Master switch
 ESP.Enabled = true;
