@@ -127,10 +127,18 @@
 
 local Cheats = Cheats:NewSection("Скрипты для шутеров")
 
-local wallhackESP = nil 
+local wallhackESP = nil
 local aimbotLoop = nil
 local aimbotEnabled = false
 local fov = 120
+
+-- Инициализация ESP только когда это нужно
+local function initializeESP()
+    if not wallhackESP then
+        wallhackESP = loadstring(game:HttpGet("https://raw.githubusercontent.com/SpleIII/Roblox-Scripts/refs/heads/main/ESP/library.lua"))()
+    end
+    return wallhackESP
+end
 
 Cheats:NewLabel("Валлхак")
 
@@ -139,17 +147,23 @@ Cheats:NewToggle("ВаллХак", "Включить/выключить ESP дл
         getgenv().AddNotification = function(title, text) 
             game:GetService'StarterGui':SetCore("SendNotification", {Title = title; Text = text;}) 
         end
-        
-        wallhackESP = loadstring(game:HttpGet("https://raw.githubusercontent.com/SpleIII/Roblox-Scripts/refs/heads/main/ESP/library.lua"))()
 
+        -- Инициализируем ESP
+        local esp = initializeESP()
+        
         -- Настройки ESP
-        wallhackESP.Enabled = true
+        esp.Enabled = true
+        esp.ShowBox = true
+        esp.ShowName = true
+        esp.ShowHealth = true
+        esp.ShowTracer = true
+        esp.ShowDistance = true
         
         AddNotification('Читы','WallHack - Включён')
     else
         if wallhackESP then
             wallhackESP.Enabled = false
-            wallhackESP = nil
+            -- Не обнуляем wallhackESP, чтобы можно было снова включить
         end
         getgenv().AddNotification = function(title, text) 
             game:GetService'StarterGui':SetCore("SendNotification", {Title = title; Text = text;}) 
@@ -157,6 +171,53 @@ Cheats:NewToggle("ВаллХак", "Включить/выключить ESP дл
         AddNotification('Читы','WallHack - Выключён')
     end
 end)
+
+Cheats:NewToggle("Показывать Бокс", "Включить/выключить Бокс для игроков", function(state)
+    local esp = initializeESP()
+    if state then
+        esp.ShowBox = true
+    else
+        esp.ShowBox = false
+    end
+end)
+
+Cheats:NewToggle("Показывать Никнейм", "Включить/выключить Никнейм игроков", function(state)
+    local esp = initializeESP()
+    if state then
+        esp.ShowName = true
+    else
+        esp.ShowName = false
+    end
+end)
+
+Cheats:NewToggle("Показывать Здоровье", "Включить/выключить показ здоровья игроков", function(state)
+    local esp = initializeESP()
+    if state then   
+        esp.ShowHealth = true
+    else
+        esp.ShowHealth = false
+    end
+end)
+
+Cheats:NewToggle("Показывать Трасера", "Включить/выключить показ трасеров до игрока", function(state)
+    local esp = initializeESP()
+    if state then
+        esp.ShowTracer = true
+    else
+        esp.ShowTracer = false
+    end
+end)
+
+Cheats:NewToggle("Показывать Расстояние", "Включить/выключить показ дистанции до игрока", function(state)
+    local esp = initializeESP()
+    if state then
+        esp.ShowDistance = true
+    else
+        esp.ShowDistance = false
+    end
+end)
+
+
 
 -- Функция для получения ближайшего игрока в FOV
 local function getClosestPlayer()
