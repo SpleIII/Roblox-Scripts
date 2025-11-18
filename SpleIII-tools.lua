@@ -153,11 +153,6 @@ Cheats:NewToggle("ВаллХак", "Включить/выключить ESP дл
         
         -- Настройки ESP
         esp.Enabled = true
-        esp.ShowBox = true
-        esp.ShowName = true
-        esp.ShowHealth = true
-        esp.ShowTracer = true
-        esp.ShowDistance = true
         
         AddNotification('Читы','WallHack - Включён')
     else
