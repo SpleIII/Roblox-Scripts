@@ -9,6 +9,7 @@
     local MultiplierSimulatorX = Window:NewTab("Multiplier Simulator X (Шанс бана)")
     local OneStatPointEveryClick = Window:NewTab("🎃 +1 Stat Point Every Click 👻 (Шанс бана)")
     local Clicker = Window:NewTab("Кликер")
+	local World = Window:NewTab("Мир")
     local Misc = Window:NewTab("Прочее")
     local Settings = Window:NewTab("Настройки")
     local Socials = Window:NewTab("Ссылки")
@@ -979,7 +980,117 @@ end)
     Clicker:NewKeybind("Клавиша переключения", "Клавиша для включения/выключения авто-кликера", Enum.KeyCode.F, function()
     end)
 
+    -- Настройки мира
+
+    local WorldSection = World:NewSection("Настройки мира")
+
+    -- Переменные для времени
+    local lighting = game:GetService("Lighting")
+    local originalClockTime = lighting.ClockTime
+    local timeEnabled = false
+    local customTime = 12 -- Полдень по умолчанию
+    local timeLoop = nil
+
+    -- Функция для уведомлений
+    local function showNotification(title, text)
+        game:GetService("StarterGui"):SetCore("SendNotification", {
+            Title = title,
+            Text = text,
+            Duration = 3
+        })
+    end
+
+    -- Функция остановки цикла
+    local function stopTimeLoop()
+        if timeLoop then
+            timeLoop:Disconnect()
+            timeLoop = nil
+        end
+    end
+
+    -- Функция запуска цикла
+    local function startTimeLoop()
+        stopTimeLoop() -- Останавливаем старый цикл если был
+        timeLoop = game:GetService("RunService").RenderStepped:Connect(function()
+            if timeEnabled then
+                lighting.ClockTime = customTime
+            end
+        end)
+    end
+
+    -- Переключатель изменения времени
+    WorldSection:NewToggle("Изменить время", "Включить/выключить настройку игрового времени (с защитой от сброса)", function(state)
+        timeEnabled = state
+        if state then
+            startTimeLoop()
+        else
+            stopTimeLoop()
+            lighting.ClockTime = originalClockTime
+            showNotification("Мир", "Время восстановлено")
+        end
+    end)
+
+    -- Слайдер для выбора времени
+    WorldSection:NewSlider("Время суток", "Выберите час (0-24)", 24, 0, function(hour)
+        customTime = hour
+        if timeEnabled then
+        end
+    end, 12) -- 12 значение по умолчанию (полдень)
+
+    -- Кнопка для сброса времени
+    WorldSection:NewButton("Сбросить время", "Вернуть оригинальное время и отключить защиту", function()
+        timeEnabled = false
+        stopTimeLoop()
+        lighting.ClockTime = originalClockTime
+        showNotification("Мир", "Время сброшено")
+    end)
+
     -- Прочие скрипты
+
+    -- Зум (Добавлено)
+    local Zoom = Misc:NewSection("Зум")
+    
+    -- Переменные для зума
+    local zoomEnabled = false
+    local UserInputService = game:GetService("UserInputService")
+    local camera = workspace.CurrentCamera
+    
+    -- Отслеживание нажатий клавиш
+    UserInputService.InputBegan:Connect(function(input, gameProcessed)
+        if gameProcessed then return end
+        if not zoomEnabled then return end
+        
+        if input.KeyCode == Enum.KeyCode.Z then
+            camera.FieldOfView = 20
+        end
+    end)
+    
+    UserInputService.InputEnded:Connect(function(input, gameProcessed)
+        if gameProcessed then return end
+        if not zoomEnabled then return end
+        
+        if input.KeyCode == Enum.KeyCode.Z then
+            camera.FieldOfView = 70
+        end
+    end)
+    
+    -- Функция для уведомлений
+    local function showNotification(title, text)
+        game:GetService("StarterGui"):SetCore("SendNotification", {
+            Title = title,
+            Text = text,
+            Duration = 3
+        })
+    end
+    
+    -- Простой переключатель зума
+    Zoom:NewToggle("Включить зум", "Вкл/Выкл функцию зума", function(state)
+        zoomEnabled = state
+        if not state then
+            camera.FieldOfView = 70
+        end
+        showNotification("Зум", state and "Включен" or "Выключен")
+    end)
 
     local Misc = Misc:NewSection("Телепорт к игрокам")
 
