@@ -75,7 +75,3 @@ game:GetService("UserInputService").InputBegan:Connect(function(input, gameProce
         toggleNoclip()
     end
 end)
-
--- Приветственное уведомление
-AddNotification('🚀 NoClip скрипт', 'Нажмите ' .. bind .. ' для переключения', 3)
-print("🎮 NoClip загружен! Нажмите " .. bind .. " для переключения")
